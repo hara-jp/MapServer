@@ -1,0 +1,10 @@
+# Resolution of Map. Length of 1 px in meter.
+resolution_x : 0.05000000074505806
+resolution_y : 0.05000000074505806
+# Pose of the Top-Left point in meter / radian
+# X-Axis is horizontally, left to right.
+# Y-Axis is vertically, bottom to top.
+origin_x : 9.950000148266554
+origin_y : 9.950000148266554
+origin_th : 0.0
+image : testMap.png
