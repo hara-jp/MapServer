@@ -34,7 +34,7 @@ public class MapServer implements RtcNewFunc, RtcDeleteFunc, RegisterModuleFunc 
     	    "lang_type",         "compile",
             // Configuration variables
             "conf.default.debug", "0",
-            "conf.default.filename", "testMap.yaml",
+            "conf.default.filename", "rouka.yaml",
             // Widget
             "conf.__widget__.debug", "text",
             "conf.__widget__.filename", "text",
