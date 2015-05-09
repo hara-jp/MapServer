@@ -152,44 +152,44 @@ public class MapServerImpl extends DataFlowComponentBase {
     	try {
     		File f = new File(m_filename.value);
     		BufferedReader br = new BufferedReader(new FileReader(f));
+    		StringBuffer strBuf = new StringBuffer();
     		while(true) {
     			String r = br.readLine();
     			if (r == null) {
     				break;
     			}
+    			strBuf.append(r);
+    			strBuf.append("\n");
     			System.out.println(r);
     		}
-    		HashMap obj = (HashMap)Yaml.load(new FileReader(f));
-    		BufferedImage file = ImageIO.read(new File((String)obj.get("image")));
-    		Double obj2 = (Double)obj.get("origin_x");
+    		br.close();
     		
-    		System.out.println(obj2);
+
+    		HashMap param = (HashMap)Yaml.load(strBuf.toString());//load(new FileReader(f));
+    		BufferedImage file = ImageIO.read(new File((String)param.get("image")));
+    		HashMap config = (HashMap)param.get("config");
     		ogMap = new OGMap(new RTC.Time(0, 0), new OGMapConfig(0, 0, 0, 0, new RTC.Pose2D(new RTC.Point2D(0, 0), 0)),
     				new OGMapTile());
-    		ogMap.config.origin.position.x = ((Double)obj.get("origin_x")).doubleValue();
-    		ogMap.config.origin.position.y = ((Double)obj.get("origin_y")).doubleValue();
-    		ogMap.config.origin.heading    = ((Double)obj.get("origin_th")).doubleValue();
-    		ogMap.config.xScale =  ((Double)obj.get("resolution_x")).doubleValue();
-    		ogMap.config.yScale =  ((Double)obj.get("resolution_y")).doubleValue();
+    		ogMap.config.origin.position.x = ((Double)config.get("origin_x")).doubleValue();
+    		ogMap.config.origin.position.y = ((Double)config.get("origin_y")).doubleValue();
+    		ogMap.config.origin.heading    = ((Double)config.get("origin_th")).doubleValue();
+    		ogMap.config.xScale =  ((Double)config.get("xScale")).doubleValue();
+    		ogMap.config.yScale =  ((Double)config.get("yScale")).doubleValue();
+    		ogMap.map.row =  ((Integer)config.get("row")).intValue();
+    		ogMap.map.column =  ((Integer)config.get("column")).intValue();
     		ogMap.config.width = file.getWidth();
     		ogMap.config.height = file.getHeight();
     		ogMap.map.width = file.getWidth();
     		ogMap.map.height = file.getHeight();
-    		ogMap.map.row = (int)(ogMap.config.origin.position.x / ogMap.config.xScale);
-    		ogMap.map.column = (int)(ogMap.config.origin.position.y / ogMap.config.yScale);
     		ogMap.map.cells = new byte[file.getWidth() * file.getHeight()];
     		for(int i = 0;i < file.getHeight();i++) {
     			for(int j = 0;j < file.getWidth();j++) {
-    				byte r = (byte)(0xFF & file.getRGB(i, j));
+    				byte r = (byte)(0xFF & file.getRGB(j, i));
     				ogMap.map.cells[i*file.getWidth() + j] = r;
     			}
     		}
-    		
-    		
-    		System.out.println(obj);
 			///BufferedImage image = ImageIO.read(new File(m_filename.value));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return RTC.ReturnCode_t.RTC_ERROR;
 		}
