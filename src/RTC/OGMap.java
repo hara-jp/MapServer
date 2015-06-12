@@ -5,7 +5,7 @@ package RTC;
 * RTC/OGMap.java .
 * IDL-to-Javaコンパイラ(ポータブル)、バージョン"3.2"によって生成されました
 * idl/MobileRobot.idlから
-* 2014年8月11日 11時47分26秒 JST
+* 2015年6月1日 13時45分12秒 JST
 */
 
 public final class OGMap implements org.omg.CORBA.portable.IDLEntity

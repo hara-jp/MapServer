@@ -26,12 +26,23 @@ module RTC {
   };
 
   enum RETURN_VALUE {
-    RETVAL_OK,
-    RETVAL_INVALID_PARAMETER,
-    RETVAL_EMPTY_MAP,
-    RETVAL_INVALID_PRECONDITION,
-    RETVAL_NOT_IMPL,
-    RETVAL_UNKNOWN_ERROR
+	// COMMON
+	RETVAL_OK,
+	RETVAL_INVALID_PARAMETER,
+	RETVAL_EMPTY_MAP,
+	RETVAL_INVALID_PRECONDITION,
+	RETVAL_NOT_IMPL,
+	RETVAL_UNKNOWN_ERROR,
+	RETVAL_NOT_FOUND,
+
+	RETVAL_ODOMETRY_INVALID_VALUE,
+	RETVAL_ODOMETRY_TIME_OUT,
+	RETVAL_RANGE_INVALID_VALUE,
+	RETVAL_RANGE_TIME_OUT,
+
+	RETVAL_EMERGENCY_STOP,
+	RETVAL_OUTOF_RANGE
+
   };
 
   enum MAPPER_STATE {
@@ -40,6 +51,14 @@ module RTC {
     MAPPER_SUSPEND,
     MAPPER_ERROR,
     MAPPER_UNKNOWN
+  };
+
+  enum FOLLOWER_STATE {
+    FOLLOWER_STOPPED,
+    FOLLOWER_FOLLOWING,
+    FOLLOWER_SUSPEND,
+    FOLLOWER_ERROR,
+    FOLLOWER_UNKNOWN
   };
 
   /*!
@@ -75,8 +94,36 @@ module RTC {
     RETURN_VALUE requestCurrentBuiltMap(out OGMap map);
   };
   
+  struct PathPlanParameter {
+	//Environmental Map
+	OGMap map;
+    /// Location of the goal.
+    Pose2D targetPose;
+    /// Location of Robot.
+    Pose2D currentPose;
+    /// How far away from the waypoint is considered success (radius in metres).
+    double distanceTolerance;
+    /// How much off the target heading is considered success (in radians).
+    double headingTolerance;
+    /// Target time to arrive at the waypoint by.
+    Time timeLimit;
+    /// Maximum sped to travel at while heading to the waypoint.
+    Velocity2D maxSpeed;
+  };
+  
+  interface PathPlanner {
+    /// Plan Path from PathPlanParater.
+	  RETURN_VALUE planPath(in PathPlanParameter param, out Path2D outPath);
+  };
+
+  interface PathFollower {
+    RETURN_VALUE followPath(in Path2D path);
+	
+    RETURN_VALUE getState(out FOLLOWER_STATE state);
+	
+    RETURN_VALUE followPathNonBlock(in Path2D path);
+  };
 
 };
-
 
 #endif

@@ -5,7 +5,7 @@ package RTC;
 * RTC/RETURN_VALUEHelper.java .
 * IDL-to-Javaコンパイラ(ポータブル)、バージョン"3.2"によって生成されました
 * idl/MobileRobot.idlから
-* 2014年8月11日 11時47分26秒 JST
+* 2015年6月1日 13時45分12秒 JST
 */
 
 abstract public class RETURN_VALUEHelper
@@ -30,7 +30,7 @@ abstract public class RETURN_VALUEHelper
   {
     if (__typeCode == null)
     {
-      __typeCode = org.omg.CORBA.ORB.init ().create_enum_tc (RTC.RETURN_VALUEHelper.id (), "RETURN_VALUE", new String[] { "RETVAL_OK", "RETVAL_INVALID_PARAMETER", "RETVAL_EMPTY_MAP", "RETVAL_INVALID_PRECONDITION", "RETVAL_NOT_IMPL", "RETVAL_UNKNOWN_ERROR"} );
+      __typeCode = org.omg.CORBA.ORB.init ().create_enum_tc (RTC.RETURN_VALUEHelper.id (), "RETURN_VALUE", new String[] { "RETVAL_OK", "RETVAL_INVALID_PARAMETER", "RETVAL_EMPTY_MAP", "RETVAL_INVALID_PRECONDITION", "RETVAL_NOT_IMPL", "RETVAL_UNKNOWN_ERROR", "RETVAL_NOT_FOUND", "RETVAL_ODOMETRY_INVALID_VALUE", "RETVAL_ODOMETRY_TIME_OUT", "RETVAL_RANGE_INVALID_VALUE", "RETVAL_RANGE_TIME_OUT", "RETVAL_EMERGENCY_STOP", "RETVAL_OUTOF_RANGE"} );
     }
     return __typeCode;
   }
