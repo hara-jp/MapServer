@@ -10,12 +10,15 @@ import RTC.OGMapHolder;
 import RTC.OGMapperPOA;
 import RTC.Pose2D;
 import RTC.RETURN_VALUE;
+import RTC.OGMap;
 /*!
  * @class OGMapperSVC_impl
  * Example class implementing IDL interface RTC::OGMapper
  */
 public class OGMapperSVC_impl extends OGMapperPOA{
     
+	private MapServerImpl rtc;
+	
     public OGMapperSVC_impl() {
         // Please add extra constructor code here.
     }
@@ -62,6 +65,8 @@ public class OGMapperSVC_impl extends OGMapperPOA{
     public RETURN_VALUE requestCurrentBuiltMap(OGMapHolder map) {
         // Please insert your code here and remove the following warning pragma
         // TODO "Code missing in function <RETURN_VALUE requestCurrentBuiltMap(OGMap map)>"
+    	OGMapHolder tmpMap = new OGMapHolder(rtc.getOGMap());
+    	map = tmpMap;
         return null;
     }
 
