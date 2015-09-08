@@ -2,9 +2,9 @@ package RTC;
 
 /**
 * RTC/MAPPER_STATEHolder.java .
-* IDL-to-Javaコンパイラ(ポータブル)、バージョン"3.2"によって生成されました
-* idl/MobileRobot.idlから
-* 2014年8月11日 11時47分26秒 JST
+* IDL-to-Java?????(?????)??????"3.2"???????????
+* idl/MobileRobot.idl??
+* 2015?5?12? 15?55?36? JST
 */
 
 public final class MAPPER_STATEHolder implements org.omg.CORBA.portable.Streamable
